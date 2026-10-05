@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- ========================= -->
+  <!-- 1. SEO & META TAGS UTAMA  -->
+  <!-- ========================= -->
+  <title>Kirim Pesan Anonim ✨</title>
+  <meta name="description" content="Kirim pesan rahasia secara anonim. Gabakal tau siapa yang ngirim!" />
+  <meta name="keywords" content="pesan anonim, ngl clone, rahasia, qna" />
+  <meta name="author" content="Andy" />
+
+  <!-- ========================= -->
+  <!-- 2. OPEN GRAPH (SOCIAL MEDIA SHARE) -->
+  <!-- ========================= -->
+  <meta property="og:title" content="Kirim Pesan Anonim ke Andy ✨" />
+  <meta property="og:description" content="Punya sesuatu yang pengen disampein tapi malu? Tulis pesan rahasiamu di sini, 100% anonim!" />
+  <!-- Ganti URL gambar di bawah dengan foto profilmu agar muncul saat link dibagikan -->
+  <meta property="og:image" content="https://ui-avatars.com/api/?name=Andy&background=c084fc&color=fff&size=256" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kirim Pesan Anonim ✨" />
+  <meta name="twitter:description" content="Tulis pesan rahasiamu di sini, 100% anonim!" />
+
+  <!-- ========================= -->
+  <!-- 3. FAVICON / ICON URL     -->
+  <!-- ========================= -->
+  <!-- Secara default menggunakan emoji ✨. Kamu bisa ganti atribut href dengan link .png / .ico kamu -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>" />
+
+  <!-- Font & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    /* Card UI */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 420px;
+      padding: 35px 25px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Profile Avatar */
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      box-shadow: 0 8px 16px rgba(236, 72, 153, 0.3);
+      border: 3px solid #fff;
+    }
+
+    /* Typography */
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1f2937;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    /* Form Elements */
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 140px;
+      resize: none;
+      border-radius: 16px;
+      border: 2px solid #e5e7eb;
+      background: #f9fafb;
+      padding: 16px;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      color: #374151;
+    }
+
+    textarea::placeholder {
+      color: #9ca3af;
+    }
+
+    textarea:focus {
+      border-color: #a855f7;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.15);
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border: none;
+      border-radius: 999px; /* Pill shape */
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      background: #9ca3af;
+    }
+
+    /* Messages */
+    .msg {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    
+    .msg.show {
+      opacity: 1;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 25px 20px; }
+      h2 { font-size: 1.25rem; }
+      textarea { height: 120px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="card">
+    <!-- Profil Placeholder (Bisa ganti teks huruf 'A' pakai tag <img> kalau ada foto URL) -->
+    <div class="avatar">A</div>
+    
+    <h2>Gabakal Tau ✨</h2>
+    <p>Kirim pesan anonim rahasia, jawaban akan dikirim ke <strong>Andy</strong>.</p>
+    
+    <form id="nglForm">
+      <div class="input-group">
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Tulis pesanmu di sini... (jangan malu-malu)"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" id="submitBtn">
+        <span>Kirim Pesan</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </form>
+    
+    <div class="msg" id="responseMsg"></div>
+  </div>
+
+  <script>
+    // ==========================================
+    // CUKUP UBAH LINK WEBHOOK DI BAWAH INI
+    // ==========================================
+    const WEBHOOK_URL = "https://unbroken-aflame-backyard.ngrok-free.dev/webhook/ngl";
+    // ==========================================
+
+    document.getElementById("nglForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const messageEl = document.getElementById("message");
+      const submitBtn = document.getElementById("submitBtn");
+      const responseMsg = document.getElementById("responseMsg");
+
+      // 1. Loading State UX (Biar user tidak klik 2x)
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `Mengirim...`;
+      responseMsg.className = "msg"; // reset class
+      responseMsg.textContent = "";
+
+      const data = {
+        pesan: messageEl.value,
+      };
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          // Success State
+          responseMsg.textContent = "✅ Pesan rahasiamu berhasil dikirim!";
+          responseMsg.className = "msg success show";
+          messageEl.value = ""; // Kosongkan form
+        } else {
+          // Error State
+          responseMsg.textContent = "❌ Gagal mengirim pesan. Coba lagi.";
+          responseMsg.className = "msg error show";
+        }
+      } catch (err) {
+        // Network Error State
+        responseMsg.textContent = "⚠️ Error: Jaringan terputus / Webhook mati.";
+        responseMsg.className = "msg error show";
+      } finally {
+        // Kembalikan tombol seperti semula
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>Kirim Pesan</span> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`;
+        
+        // Hilangkan notifikasi setelah 5 detik (Opsional untuk UX yang bersih)
+        setTimeout(() => {
+          responseMsg.classList.remove("show");
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>
